@@ -10,26 +10,28 @@ source:
   sha256: 0733fff6b78658cc4237076d105c9d19499a204deb1b800ffa65c23d236e722a
 
 build:
-  noarch: python
+  skip: true # [py<38 or s390x]
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - hatch-jupyter-builder >=0.5
-    - hatch-nodejs-version
+    - hatch-nodejs-version >=0.3.2
     - hatchling >=1.5.0
-    - jupyterlab =4
     - pip
-    - python >=3.8,<4.0
+    - python
   run:
-    - python >=3.8
-    - jupyterlab >=3.0.0
+    - python
+    - jupyterlab >=3,<5
 
 test:
+  imports:
+    - lckr_jupyterlab_variableinspector
   requires:
     - jupyterlab =4
     - pip
+    - m2-grep # [win]
   commands:
     - pip check
     - jupyter labextension list
@@ -41,6 +43,8 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: Variable Inspector extension for Jupyterlab.
+  dev_url: https://github.com/jupyterlab-contrib/jupyterlab-variableInspector
+  doc_url: https://github.com/jupyterlab-contrib/jupyterlab-variableInspector
 
 extra:
   recipe-maintainers:
