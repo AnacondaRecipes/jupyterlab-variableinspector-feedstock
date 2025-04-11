@@ -1,5 +1,5 @@
 {% set name = "lckr_jupyterlab_variableinspector" %}
-{% set version = "3.1.0" %}
+{% set version = "3.2.4" %}
 
 package:
   name: jupyterlab-variableinspector
@@ -7,10 +7,19 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0733fff6b78658cc4237076d105c9d19499a204deb1b800ffa65c23d236e722a
+  sha256: 9bad61401ef24cbdd4bc000d882038bbdd9d79550f624bd1930978dd56dddf7b
+  patches:
+    # Upstream specification:
+    # - jupyterlab >=4.0.0,<5
+    # But there's a conflict in package.json for jupyterlab >=4.3 and jupyterlab-variableinspector 3.2.4
+    # Conflicting Dependencies:
+    # JupyterLab              Extension        Package
+    # >=0.16.6 <0.17.0        >=0.15.0 <0.16.0 @jupyter/web-components
+    # There's a PR to solve it: https://github.com/jupyterlab-contrib/jupyterlab-variableInspector/pull/338
+    - 0001-Bump-jupyter-web-components-to-0.16.patch
 
 build:
-  skip: true # [py<38 or s390x]
+  skip: true # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -18,23 +27,25 @@ requirements:
   host:
     - hatch-jupyter-builder >=0.5
     - hatch-nodejs-version >=0.3.2
+    - jupyterlab ==4.3.4
     - hatchling >=1.5.0
     - pip
     - python
   run:
     - python
-    - jupyterlab >=3,<5
+    - jupyterlab >=4.0.0,<5
 
 test:
   imports:
     - lckr_jupyterlab_variableinspector
   requires:
-    - jupyterlab =4
+    - jupyterlab
     - pip
     - m2-grep # [win]
   commands:
     - pip check
-    - jupyter labextension list
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - jupyter labextension list --verbose
     - jupyter labextension list 2>&1 | grep -ie "@lckr/jupyterlab_variableinspector.*OK.*(python, lckr_jupyterlab_variableinspector)"
 
 about:
@@ -45,6 +56,7 @@ about:
   summary: Variable Inspector extension for Jupyterlab.
   dev_url: https://github.com/jupyterlab-contrib/jupyterlab-variableInspector
   doc_url: https://github.com/jupyterlab-contrib/jupyterlab-variableInspector
+  description: Jupyterlab extension that shows currently used variables and their values.
 
 extra:
   recipe-maintainers:
