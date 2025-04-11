@@ -1,59 +1,13 @@
-From cd1a6db78f6fa84623bb17971a34ba007a42d3fe Mon Sep 17 00:00:00 2001
-From: Ian Thomas <ianthomas23@gmail.com>
-Date: Fri, 7 Feb 2025 09:34:00 +0000
-Subject: [PATCH] Bump @jupyter/web-components to 0.16
-
----
- package.json |  2 +-
- yarn.lock    | 10 +++++-----
- 2 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/package.json b/package.json
-index d7a4a4b..033b051 100644
---- a/package.json
-+++ b/package.json
+diff --git a/lckr_jupyterlab_variableinspector/labextension/package.json b/lckr_jupyterlab_variableinspector/labextension/package.json
+index 6921556..0cb4fd5 100644
+--- a/lckr_jupyterlab_variableinspector/labextension/package.json
++++ b/lckr_jupyterlab_variableinspector/labextension/package.json
 @@ -53,7 +53,7 @@
-     },
-     "packageManager": "yarn@3.5.0",
-     "dependencies": {
--        "@jupyter/web-components": "^0.15.0",
-+        "@jupyter/web-components": "^0.16.0",
-         "@jupyterlab/application": "^4.0.0",
-         "@jupyterlab/apputils": "^4.0.0",
-         "@jupyterlab/console": "^4.0.0",
-diff --git a/yarn.lock b/yarn.lock
-index cdae0de..02a11a9 100644
---- a/yarn.lock
-+++ b/yarn.lock
-@@ -485,15 +485,15 @@ __metadata:
-   languageName: node
-   linkType: hard
- 
--"@jupyter/web-components@npm:^0.15.0":
--  version: 0.15.3
--  resolution: "@jupyter/web-components@npm:0.15.3"
-+"@jupyter/web-components@npm:^0.16.0":
-+  version: 0.16.7
-+  resolution: "@jupyter/web-components@npm:0.16.7"
-   dependencies:
-     "@microsoft/fast-colors": ^5.3.1
-     "@microsoft/fast-element": ^1.12.0
-     "@microsoft/fast-foundation": ^2.49.4
-     "@microsoft/fast-web-utilities": ^5.4.1
--  checksum: a0980af934157bfdbdb6cc169c0816c1b2e57602d524c56bdcef746a4c25dfeb8f505150d83207c8695ed89b5486cf53d35a3382584d25ef64db666e4e16e45b
-+  checksum: ec3336247bbabb2e2587c2cf8b9d0e80786b454916dd600b3d6791bf08c3d1e45a7ec1becf366a5491ab56b0be020baa8c50a5b6067961faf5ec904de31243aa
-   languageName: node
-   linkType: hard
- 
-@@ -1124,7 +1124,7 @@ __metadata:
-   version: 0.0.0-use.local
-   resolution: "@lckr/jupyterlab_variableinspector@workspace:."
-   dependencies:
--    "@jupyter/web-components": ^0.15.0
-+    "@jupyter/web-components": ^0.16.0
-     "@jupyterlab/application": ^4.0.0
-     "@jupyterlab/apputils": ^4.0.0
-     "@jupyterlab/builder": ^4.0.0
--- 
-2.43.0
-
+   },
+   "packageManager": "yarn@3.5.0",
+   "dependencies": {
+-    "@jupyter/web-components": "^0.15.0",
++    "@jupyter/web-components": "^0.16.0",
+     "@jupyterlab/application": "^4.0.0",
+     "@jupyterlab/apputils": "^4.0.0",
+     "@jupyterlab/console": "^4.0.0",
