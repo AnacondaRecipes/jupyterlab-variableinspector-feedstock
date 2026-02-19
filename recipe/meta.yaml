@@ -20,17 +20,13 @@ source:
 
 build:
   skip: true # [py<38]
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
-  build:
-    - patch  # [not win]
-    - m2-patch  # [win]
   host:
     - hatch-jupyter-builder >=0.5
     - hatch-nodejs-version >=0.3.2
-    - jupyterlab ==4.3.4
     - hatchling >=1.5.0
     - pip
     - python
@@ -44,7 +40,7 @@ test:
   requires:
     - jupyterlab
     - pip
-    - m2-grep # [win]
+    - msys2-grep # [win]
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
